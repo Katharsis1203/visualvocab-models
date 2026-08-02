@@ -1,0 +1,10 @@
+{
+  "version": "1.1.0",
+  "modelUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/visualvocab-models/main/best.tflite",
+  "metadataUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/visualvocab-models/main/classes.json",
+  "modelSha256": "REPLACE_WITH_MODEL_HASH",
+  "metadataSha256": "REPLACE_WITH_CLASSES_HASH",
+  "releaseNotes": "First downloadable VisualVocab model.",
+  "downloadSizeBytes": 0,
+  "minimumAppVersion": 1
+}
