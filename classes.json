@@ -1,6 +1,6 @@
 {
   "names": {
-    "0": "aaaaa"
+    "0": "monster"
   },
   "input_size": 640,
   "base_model": "yolo11n.pt",
