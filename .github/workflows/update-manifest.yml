@@ -1,0 +1,94 @@
+name: Update model manifest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - best.tflite
+      - classes.json
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f best.tflite
+          test -f classes.json
+
+          MODEL_HASH="$(sha256sum best.tflite | awk '{print $1}')"
+          METADATA_HASH="$(sha256sum classes.json | awk '{print $1}')"
+          MODEL_SIZE="$(stat -c%s best.tflite)"
+
+          python3 - <<PY
+          import json
+          from pathlib import Path
+
+          manifest_path = Path("manifest.json")
+
+          if manifest_path.exists():
+              manifest = json.loads(
+                  manifest_path.read_text(encoding="utf-8")
+              )
+          else:
+              manifest = {}
+
+          manifest.update({
+              "version": manifest.get("version", "1.1.0"),
+              "modelUrl": (
+                  "https://raw.githubusercontent.com/"
+                  "Katharsis1203/visualvocab-models/main/best.tflite"
+              ),
+              "metadataUrl": (
+                  "https://raw.githubusercontent.com/"
+                  "Katharsis1203/visualvocab-models/main/classes.json"
+              ),
+              "modelSha256": "${MODEL_HASH}",
+              "metadataSha256": "${METADATA_HASH}",
+              "releaseNotes": manifest.get(
+                  "releaseNotes",
+                  "Updated VisualVocab detection model."
+              ),
+              "downloadSizeBytes": int("${MODEL_SIZE}"),
+              "minimumAppVersion": manifest.get(
+                  "minimumAppVersion",
+                  1
+              )
+          })
+
+          manifest_path.write_text(
+              json.dumps(manifest, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          PY
+
+          cat manifest.json
+
+      - name: Commit updated manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet -- manifest.json; then
+            echo "manifest.json is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add manifest.json
+          git commit -m "Update model manifest hashes"
+          git push
