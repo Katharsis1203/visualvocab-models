@@ -1,5 +1,5 @@
 {
-  "version": "1.1.1",
+  "version": "1.1.2",
   "modelUrl": "https://raw.githubusercontent.com/Katharsis1203/visualvocab-models/main/best.tflite",
   "metadataUrl": "https://raw.githubusercontent.com/Katharsis1203/visualvocab-models/main/classes.json",
   "modelSha256": "0aee186106905a3fbdc9b679744eb749788ae3c430f61f04628f525e836a1700",
