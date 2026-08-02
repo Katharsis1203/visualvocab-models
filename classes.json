@@ -1,10 +1,6 @@
 {
   "names": {
-    "0": "bananas",
-    "1": "book",
-    "2": "dish",
-    "3": "glass",
-    "4": "table"
+    "0": "aaaaa"
   },
   "input_size": 640,
   "base_model": "yolo11n.pt",
