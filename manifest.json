@@ -1,8 +1,8 @@
 {
-  "version": "1.1.8",
+  "version": "1.1.9",
   "modelUrl": "https://raw.githubusercontent.com/Katharsis1203/visualvocab-models/main/best.tflite",
   "metadataUrl": "https://raw.githubusercontent.com/Katharsis1203/visualvocab-models/main/classes.json",
-  "modelSha256": "e5975b31ddfdb4f980312af5a433e8265ea2e740b532733033a25497808b4e6a",
+  "modelSha256": "2258d3bb72dc16fbc410bf9295a47e13e84da7869f4e545e84be7e75fbd9cff3",
   "metadataSha256": "8b89b05c9d50294862c47d93212a9413acae2f2af780a3d1ff1bffef6bc3cd3c",
   "releaseNotes": "Updated from VisualVocab Teach Mode training data.",
   "downloadSizeBytes": 10625815,
